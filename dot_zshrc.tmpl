@@ -1,28 +1,30 @@
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/hayato_saitou/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
 # paths
-export PATH="$HOME/.nodenv/shims:/usr/local/bin:/usr/bin:/bin:$PATH"
-export PATH="$HOME/.nodenv/bin:$PATH"
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.cargo/env:$PATH
-export PATH=/usr/local/go/bin:$PATH
-export PATH=$HOME/go/bin:$PATH
-export PATH=$HOME/.rye/env:$PATH
-export PATH="$HOME/.rye/shims:$PATH"
-export NVM_DIR="$HOME/.nvm"
+# export PATH="$HOME/.nodenv/shims:/usr/local/bin:/usr/bin:/bin:$PATH"
+# export PATH="$HOME/.nodenv/bin:$PATH"
+# export PATH=$(brew --prefix)/bin:$PATH
+# export PATH=$HOME/.cargo/bin:$PATH
+# export PATH=$HOME/.cargo/env:$PATH
+# export PATH=/usr/local/go/bin:$PATH
+# export PATH=$HOME/go/bin:$PATH
+# export PATH=$HOME/.rye/env:$PATH
+# export PATH="$HOME/.rye/shims:$PATH"
+# export NVM_DIR="$HOME/.nvm"
 
 # bind keys
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey ';5C' forward-word
 bindkey ';5D' backward-word
+bindkey '^[o' forward-word
+bindkey '^[u' backward-word
+bindkey '^[p' backward-kill-word
+bindkey '^K' kill-whole-line
+
+
 
 # alias
 ## lsd
@@ -49,6 +51,11 @@ alias lg="lazygit"
 
 ## alias exec
 alias ex "exec zsh"
+
+## alias pbcopy
+{{ if eq .chezmoi.os "linux" }}
+alias pbcopy="xsel --clipboard --input"
+{{ end }}
 
 ## fzf
 alias fp="fzf --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
@@ -77,7 +84,7 @@ zle -N fzf-select-history
 bindkey '^r' fzf-select-history
 
 # z
-. `brew --prefix`/etc/profile.d/z.sh
+. $(brew --prefix)/etc/profile.d/z.sh
 
 ## syntax highlighting
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -93,12 +100,17 @@ then
 fi
 
 # evals
-eval "$($(brew --prefix)/bin/brew shellenv)"
-eval "$(starship init zsh)"
-eval "$(sheldon source)"
-eval "$(anyenv init -)"
-eval "$(nodenv init -)"
+# eval "$($(brew --prefix)/bin/brew shellenv)"
+# eval "$(starship init zsh)"
+# eval "$(sheldon source)"
+# eval "$(anyenv init -)"
+# eval "$(nodenv init -)"
 
 
 # for macOS keychain
+{{ if eq .chezmoi.os "darwin" }}
 ssh-add --apple-load-keychain
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/hayato_saitou/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+{{ end }}
