@@ -1,0 +1,71 @@
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/hayato_saitou/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+export PATH="$HOME/.nodenv/shims:/usr/local/bin:/usr/bin:/bin:$PATH"
+export PATH="$HOME/.nodenv/bin:$PATH"
+eval "$(anyenv init -)"
+eval "$(nodenv init -)"
+
+# alias
+## lsd
+alias lsd="lsd --tree -I "target" -I "node_modules" -I "fonts" -I "Downloads" "
+alias ls="lsd --tree --depth 1"
+alias ll="ls -l"
+alias lsa="ls -la"
+
+## Git
+### git 
+alias gc="git checkout"
+alias gc-b="git checkout -b"
+alias gpush="git push"
+alias gpull="git pull"
+alias ga="git add"
+alias gs="git status"
+alias gc-m="git commit -m"
+alias ghg="ghq get"
+alias stash="stash -u"
+alias gsl="git stash list"
+
+### lazy git
+alias lg="lazygit"
+
+## alias exec
+alias ex "exec zsh"
+
+## fzf
+alias fp="fzf --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
+bindkey -s '^p' 'fp\n'
+
+
+## ghq配下のディレクトリを一覧表示
+function _ghq_fzf_repo() {
+    local repo="$(ghq list | fzf --height=100% --border --preview="ls -AF --color=always ${$(ghq root)}/{1}")"
+    if [ -n "$repo" ]; then
+        BUFFER="cd $(ghq root)/$repo"
+    fi
+    zle accept-line
+    zle reset-prompt
+}
+zle -N ghq_fzf_repo _ghq_fzf_repo
+bindkey '^g' ghq_fzf_repo
+
+## fzf history
+function fzf-select-history() {
+    BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+zle -N fzf-select-history
+bindkey '^r' fzf-select-history
+
+# z
+. `brew --prefix`/etc/profile.d/z.sh
+
+ssh-add --apple-load-keychain
+
+eval "$(starship init zsh)"
