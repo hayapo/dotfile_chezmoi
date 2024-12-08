@@ -2,7 +2,7 @@
 
 {{ if eq .chezmoi.os "darwin" }}
 wget "https://go.dev/dl/$(curl 'https://go.dev/VERSION?m=text' | grep go).darwin-amd64.pkg"
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go*.darwin-amd64.pkg
+sudo rm -rf /usr/local/go
 {{ end }}
 
 {{ if eq .chezmoi.os "linux" }}
