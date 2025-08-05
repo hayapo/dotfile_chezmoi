@@ -4,12 +4,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 {{ end }}
 {{ if eq .chezmoi.os "linux" }}
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-{{ end }}
 eval "$(starship init zsh)"
+{{ end }}
 eval "$(sheldon source)"
 eval "$(anyenv init -)"
 eval "$(nodenv init -)"
-
+eval "$(phpenv init -)"
 
 # paths
 export PATH="$HOME/.nodenv/shims:/usr/local/bin:/usr/bin:/bin:$PATH"
@@ -22,6 +22,7 @@ export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.rye/env:$PATH
 export PATH="$HOME/.rye/shims:$PATH"
 export NVM_DIR="$HOME/.nvm"
+export PATH="/$HOME/.anyenv/envs/phpenv/bin:$PATH"
 
 # env
 export GITHUB_USER=hayapo

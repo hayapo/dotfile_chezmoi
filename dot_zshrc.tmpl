@@ -101,7 +101,6 @@ fi
 
 # evals
 # eval "$($(brew --prefix)/bin/brew shellenv)"
-# eval "$(starship init zsh)"
 # eval "$(sheldon source)"
 # eval "$(anyenv init -)"
 # eval "$(nodenv init -)"
@@ -114,3 +113,5 @@ ssh-add --apple-load-keychain
 export PATH="/Users/hayato_saitou/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 {{ end }}
+
+eval "$(starship init zsh)"
