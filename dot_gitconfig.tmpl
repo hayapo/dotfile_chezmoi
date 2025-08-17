@@ -1,0 +1,21 @@
+[user]
+	email = 39045817+hayapo@users.noreply.github.com
+	name = hayapo
+[init]
+	defaultBranch = main
+{{ if eq .chezmoi.os "darwin" }}
+[credential]
+	helper = osxkeychain
+{{ else if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe
+{{	end }}
+{{ end }}
+{{ if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "hsaitou")) }}
+[ghq]
+	root = /Users/hayato_saitou/GitProjects
+{{ else }}
+[ghq]
+	root = /home/hayapo/GitProjects
+{{ end }}

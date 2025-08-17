@@ -1,9 +1,0 @@
-[user]
-	email = 39045817+hayapo@users.noreply.github.com
-	name = hayapo
-[init]
-	defaultBranch = main
-[credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe
-[ghq]
-	root = /home/hayapo/GitProject
