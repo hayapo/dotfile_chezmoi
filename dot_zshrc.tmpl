@@ -65,14 +65,18 @@ bindkey -s '^p' 'fp\n'
 ## ghq配下のディレクトリを一覧表示
 function _ghq_fzf_repo() {
     local repo="$(ghq list | fzf --height=100% --border --preview="ls -AF --color=always ${$(ghq root)}/{1}")"
-    if [ -n "$repo" ]; then
-        BUFFER="cd $(ghq root)/$repo"
+    if [ -z "$repo" ]; then
+        zle reset-prompt
+        return
     fi
+
+    BUFFER="cd $(ghq root)/$repo"
+
     zle accept-line
     zle reset-prompt
 }
 zle -N ghq_fzf_repo _ghq_fzf_repo
-bindkey '^g' ghq_fzf_repo
+bindkey '^n' ghq_fzf_repo
 
 ## fzf history
 function fzf-select-history() {
