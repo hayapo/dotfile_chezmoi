@@ -12,10 +12,5 @@
 	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe
 {{	end }}
 {{ end }}
-{{ if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "hsaitou")) }}
 [ghq]
-	root = /Users/hayato_saitou/GitProjects
-{{ else }}
-[ghq]
-	root = /home/hayapo/GitProjects
-{{ end }}
+	root = ~/GitProjects
