@@ -1,18 +1,24 @@
 [user]
 	email = 39045817+hayapo@users.noreply.github.com
 	name = hayapo
+	{{- if eq .chezmoi.os "darwin" }}
 	signingkey = 246F5B82C6A0E8D5
+	{{- else if eq .chezmoi.os "linux" }}
+	{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+	signingkey = 5C98FC5EAB4449C4
+	{{-	end }}
+	{{- end }}
 [init]
 	defaultBranch = main
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 [credential]
 	helper = osxkeychain
-{{ else if eq .chezmoi.os "linux" }}
-{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{- else if eq .chezmoi.os "linux" }}
+{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 [credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe
-{{	end }}
-{{ end }}
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+{{-	end }}
+{{- end }}
 [ghq]
 	root = ~/GitProjects
 [commit]
