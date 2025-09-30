@@ -1,6 +1,7 @@
 [user]
 	email = 39045817+hayapo@users.noreply.github.com
 	name = hayapo
+	signingkey = 246F5B82C6A0E8D5
 [init]
 	defaultBranch = main
 {{ if eq .chezmoi.os "darwin" }}
@@ -14,3 +15,5 @@
 {{ end }}
 [ghq]
 	root = ~/GitProjects
+[commit]
+	gpgsign = true
