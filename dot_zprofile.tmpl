@@ -9,7 +9,9 @@ eval "$(starship init zsh)"
 eval "$(sheldon source)"
 eval "$(anyenv init -)"
 eval "$(nodenv init -)"
+{{- if eq .chezmoi.os "darwin" }}
 eval "$(phpenv init -)"
+{{- end }}
 
 # paths
 export PATH="$HOME/.nodenv/shims:/usr/local/bin:/usr/bin:/bin:$PATH"

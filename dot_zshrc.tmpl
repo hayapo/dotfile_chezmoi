@@ -148,7 +148,9 @@ fi
 # eval "$(nodenv init -)"
 
 # initialize phpbrew
+{{- if eq .chezmoi.os "darwin" }}
 source $HOME/.phpbrew/bashrc
+{{- end }}
 
 # for macOS keychain
 {{ if eq .chezmoi.os "darwin" }}
