@@ -13,7 +13,14 @@ SAVEHIST=1000
 # export PATH=$HOME/.rye/env:$PATH
 # export PATH="$HOME/.rye/shims:$PATH"
 # export NVM_DIR="$HOME/.nvm"
+{{- if eq .chezmoi.os "darwin" }}
 export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=/Users/hayato_saitou/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+{{- else if eq .chezmoi.os "linux" }}
+{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{-	end }}
+{{- end }}
+
 
 # bind keys
 bindkey "^[[H" beginning-of-line
@@ -153,12 +160,20 @@ source $HOME/.phpbrew/bashrc
 {{- end }}
 
 # for macOS keychain
-{{ if eq .chezmoi.os "darwin" }}
-ssh-add --apple-load-keychain
+# {{ if eq .chezmoi.os "darwin" }}
+# ssh-add --apple-load-keychain
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/hayato_saitou/.rd/bin:$PATH"
+# export PATH="/Users/hayato_saitou/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-{{ end }}
+# {{ end }}
+
+# pnpm
+export PNPM_HOME="/Users/hayato_saitou/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
 eval "$(starship init zsh)"

@@ -2,7 +2,7 @@
 	email = 39045817+hayapo@users.noreply.github.com
 	name = hayapo
 	{{- if eq .chezmoi.os "darwin" }}
-	signingkey = 246F5B82C6A0E8D5
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKD8zsDihrG9o/eHJ3402GOdtWuA4XCH2nXZrFcgWZTp
 	{{- else if eq .chezmoi.os "linux" }}
 	{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 	signingkey = 5C98FC5EAB4449C4
@@ -23,3 +23,13 @@
 	root = ~/GitProjects
 [commit]
 	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	{{- if eq .chezmoi.os "darwin" }}
+	allowedSigners = /Users/hayato_saitou/.ssh/allowedSigners
+	{{- else if eq .chezmoi.os "linux" }}
+	{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+	allowedSigners = /Users/hayato_saitou/.ssh/allowedSigners
+	{{-	end }}
+	{{- end }}
