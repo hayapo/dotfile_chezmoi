@@ -13,8 +13,8 @@ SAVEHIST=1000
 # export PATH=$HOME/.rye/env:$PATH
 # export PATH="$HOME/.rye/shims:$PATH"
 # export NVM_DIR="$HOME/.nvm"
-{{- if eq .chezmoi.os "darwin" }}
 export GPG_TTY=$(tty)
+{{- if eq .chezmoi.os "darwin" }}
 export SSH_AUTH_SOCK=/Users/hayato_saitou/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
 {{- else if eq .chezmoi.os "linux" }}
 {{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
@@ -42,7 +42,7 @@ alias ll="ls -l"
 alias lsa="ls -la"
 
 ## Git
-### git 
+### git
 alias gc="git checkout"
 alias gc-b="git checkout -b"
 alias gpush="git push"
@@ -143,7 +143,7 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-  
+
   autoload -Uz compinit
   compinit
 fi
@@ -168,7 +168,13 @@ source $HOME/.phpbrew/bashrc
 # {{ end }}
 
 # pnpm
+{{- if eq .chezmoi.os "darwin" }}
 export PNPM_HOME="/Users/hayato_saitou/Library/pnpm"
+{{- else if eq .chezmoi.os "linux" }}
+{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+export PNPM_HOME="$HOME/.local/share/pnpm"
+{{-	end }}
+{{- end }}
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
