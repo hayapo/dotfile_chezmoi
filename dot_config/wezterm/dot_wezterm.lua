@@ -3,14 +3,15 @@ local config = {}
 if wezterm.config_builder then
   config = wezterm.config_builder()
 end
+config.automatically_reload_config = true
 
 config.wsl_domains = {
-  { 
+  {
     name = "Ubuntu",
     distribution = "Ubuntu-22.04",
     username = "hayapo",
     default_cwd = "/home/hayapo",
-    default_prog = { "/home/linuxbrew/.linuxbrew/bin/zsh" },
+    default_prog = { "/home/linuxbrew/.linuxbrew/bin/zsh", "--login" },
   },
 }
 
@@ -29,24 +30,46 @@ config.adjust_window_size_when_changing_font_size = false
 config.hyperlink_rules = {}
 config.audible_bell = "Disabled"
 
+config.window_padding = {
+  top = 15,
+  bottom = 15,
+  left = 15,
+  right = 15,
+}
+
+config.window_background_opacity = 0.7
+
 -- Setting the window background image
-local SAC_1 = "C:\\Users\\hayat\\Pictures\\wallpaper\\SAC_1.jpg"
-local SAC_2 = "C:\\Users\\hayat\\Pictures\\wallpaper\\SAC_2.jpg"
-local Laughingman = "C:\\Users\\hayat\\Pictures\\wallpaper\\Laughingman.jpg"
-
-config.window_background_image = SAC_2
-config.window_background_opacity = 1.0
+-- local Laughingman = "C:\\Users\\hayat\\Pictures\\wallpaper\\laughing_man_1.jpg"
+local Laughingman = "C:\\Users\\hayat\\Pictures\\wallpaper\\laughing_man_2.jpg"
+config.window_background_image = Laughingman
 config.window_background_image_hsb = {
-  -- Darken the background image by reducing it to 1/3rd
-  brightness = 0.2,
-
-  -- You can adjust the hue by scaling its value.
-  -- a multiplier of 1.0 leaves the value unchanged.
+  brightness = 0.05,
   hue = 1.0,
-
-  -- You can adjust the saturation also.
   saturation = 1.0,
 }
+
+-- ウィンドウ・タブの装飾
+
+-- タイトルバーを非表示
+config.window_decorations = "RESIZE"
+-- タブバーの表示
+config.show_tabs_in_tab_bar = true
+-- タブが一つの時は非表示
+config.hide_tab_bar_if_only_one_tab = true
+-- タブ同士の境界線を非表示
+config.colors = {
+  tab_bar = {
+    inactive_tab_edge = "none",
+  },
+}
+-- タブの形をカスタマイズ
+-- タブの左側の装飾
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
+-- タブの右側の装飾
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
+
+-- キーコンフィグ
 
 local act = wezterm.action
 config.keys = {
@@ -57,10 +80,19 @@ config.keys = {
     action = act.ToggleFullScreen,
   },
   {
-    -- Alt+Shift+Tで新しいタブを作成
+    -- Alt+Tで新しいタブを作成
     key = 't',
-    mods = 'SHIFT|CTRL',
+    mods = 'META',
     action = wezterm.action.SpawnCommandInNewTab {
+      cwd = "/home/hayapo",
+    },
+  },
+  {
+    -- Alt+Dで垂直方向に新しいペインを作成
+    key = "d",
+    mods = "META",
+    action = act.SplitHorizontal {
+      domain = 'CurrentPaneDomain',
       cwd = "/home/hayapo",
     },
   },
@@ -68,16 +100,38 @@ config.keys = {
     -- Alt+Shift+Dで垂直方向に新しいペインを作成
     key = "d",
     mods = "SHIFT|META",
-    action = act.SplitHorizontal { 
-      domain = 'CurrentPaneDomain', 
+    action = act.SplitVertical {
+      domain = 'CurrentPaneDomain',
       cwd = "/home/hayapo",
     },
   },
   {
     -- paste from the clipboard
-    key = 'v', 
-    mods = 'CTRL', 
+    key = 'v',
+    mods = 'CTRL',
     action = act.PasteFrom 'Clipboard'
+  },
+  {
+    -- Tabを閉じる
+    key = "w",
+    mods = "SHIFT|META",
+    action = act.CloseCurrentTab {
+      confirm = true
+    },
+  },
+  {
+    -- Paneを閉じる
+    key = "w",
+    mods = "META",
+    action = act.CloseCurrentPane {
+      confirm = true
+    },
+  },
+  {
+    -- Paneを選択
+    key = 'p',
+    mods = 'ALT',
+    action = act.PaneSelect,
   },
 }
 
