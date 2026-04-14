@@ -219,34 +219,34 @@ on-mode-changed = []
 
 
 [workspace-to-monitor-force-assignment]
-    1 = '^built-in retina display$'
-    2 = '^built-in retina display$'
-    3 = '^built-in retina display$'
-    4 = '^built-in retina display$'
-    5 = '^built-in retina display$'
-    6 = '^built-in retina display$'
-    7 = '^built-in retina display$'
-    8 = '^built-in retina display$'
-    9 = '^built-in retina display$'
-    0 = '^built-in retina display$'
+    1 = 'built-in'
+    2 = 'built-in'
+    3 = 'built-in'
+    4 = 'built-in'
+    5 = 'built-in'
+    6 = 'built-in'
+    7 = 'built-in'
+    8 = 'built-in'
+    9 = 'built-in'
+    0 = 'built-in'
 
-    A = ['^lg ultrafine$', '^built-in retina display$']
-    S = ['^lg ultrafine$', '^built-in retina display$']
-    D = ['^lg ultrafine$', '^built-in retina display$']
-    F = ['^lg ultrafine$', '^built-in retina display$']
-    G = ['^lg ultrafine$', '^built-in retina display$']
+    A = ['^lg ultrafine$', 'built-in']
+    S = ['^lg ultrafine$', 'built-in']
+    D = ['^lg ultrafine$', 'built-in']
+    F = ['^lg ultrafine$', 'built-in']
+    G = ['^lg ultrafine$', 'built-in']
 
-    Z = ['^lg ultrafine$', '^built-in retina display$']
-    X = ['^lg ultrafine$', '^built-in retina display$']
-    C = ['^lg ultrafine$', '^built-in retina display$']
-    V = ['^lg ultrafine$', '^built-in retina display$']
-    B = ['^lg ultrafine$', '^built-in retina display$']
+    Z = ['^lg ultrafine$', 'built-in']
+    X = ['^lg ultrafine$', 'built-in']
+    C = ['^lg ultrafine$', 'built-in']
+    V = ['^lg ultrafine$', 'built-in']
+    B = ['^lg ultrafine$', 'built-in']
 
-    Q = ['sidecar', '^built-in retina display$', '^lg ultrafine$']
-    W = ['sidecar', '^built-in retina display$', '^lg ultrafine$']
-    E = ['sidecar', '^built-in retina display$', '^lg ultrafine$']
-    R = ['sidecar', '^built-in retina display$', '^lg ultrafine$']
-    T = ['sidecar', '^built-in retina display$', '^lg ultrafine$']
+    Q = ['sidecar', 'built-in', '^lg ultrafine$']
+    W = ['sidecar', 'built-in', '^lg ultrafine$']
+    E = ['sidecar', 'built-in', '^lg ultrafine$']
+    R = ['sidecar', 'built-in', '^lg ultrafine$']
+    T = ['sidecar', 'built-in', '^lg ultrafine$']
 
 # Workspace 1 app setting
 [[on-window-detected]]
