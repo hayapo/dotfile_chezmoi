@@ -2,18 +2,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-# paths
-# export PATH="$HOME/.nodenv/shims:/usr/local/bin:/usr/bin:/bin:$PATH"
-# export PATH="$HOME/.nodenv/bin:$PATH"
-# export PATH=$(brew --prefix)/bin:$PATH
-# export PATH=$HOME/.cargo/bin:$PATH
-# export PATH=$HOME/.cargo/env:$PATH
-# export PATH=/usr/local/go/bin:$PATH
-# export PATH=$HOME/go/bin:$PATH
-# export PATH=$HOME/.rye/env:$PATH
-# export PATH="$HOME/.rye/shims:$PATH"
-# export NVM_DIR="$HOME/.nvm"
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
 {{- if eq .chezmoi.os "darwin" }}
 export SSH_AUTH_SOCK=/Users/hayato_saitou/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
 {{- else if eq .chezmoi.os "linux" }}
@@ -59,7 +48,7 @@ alias gsl="git stash list"
 alias lg="lazygit"
 
 ## alias exec
-alias ex "exec zsh"
+alias ex="exec zsh"
 
 ## alias pbcopy
 {{ if eq .chezmoi.os "linux" }}
@@ -133,32 +122,27 @@ function aws-account () {
 zle -N aws-account
 bindkey '^z' aws-account
 
-# z
-. $(brew --prefix)/etc/profile.d/z.sh
+# OpenAIのAPIキーを現在のセッションにだけロードする関数
+set-litellm-key() {
+  # ロック解除されていなければ解除する（セッションキーを取得）
+  if [ -z "$BW_SESSION" ]; then
+    export BW_SESSION="$(bw unlock --raw)"
+  fi
+  
+  # キーを取得して環境変数にセット
+  export LITELLM_API_KEY=$(bw get notes "LITELLM_API_KEY")
 
-## syntax highlighting
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  # Codexが最初に起動した時点の古い環境変数をずっと保持した状態のプロセスになっている可能性があるため、環境変数をセットしたら必ずcodexのプロセスを殺す
+  pkill -f codex >/dev/null 2>&1
 
-## complations
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  echo "✅ LITELLM_API_KEYを環境変数にセットしました (このタブを閉じるとリセットされます)"
+}
 
-  autoload -Uz compinit
-  compinit
-fi
-
-# evals
-# eval "$($(brew --prefix)/bin/brew shellenv)"
-# eval "$(sheldon source)"
-# eval "$(anyenv init -)"
-# eval "$(nodenv init -)"
-
-# initialize phpbrew
-{{- if eq .chezmoi.os "darwin" }}
-source $HOME/.phpbrew/bashrc
-{{- end }}
+## completions
+autoload -Uz compinit
+() {
+  if (( $# )); then compinit; else compinit -C; fi
+} ${ZDOTDIR:-$HOME}/.zcompdump(N.mh+24)
 
 # for macOS keychain
 # {{ if eq .chezmoi.os "darwin" }}
@@ -168,19 +152,11 @@ source $HOME/.phpbrew/bashrc
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 # {{ end }}
 
-# pnpm
-{{- if eq .chezmoi.os "darwin" }}
-export PNPM_HOME="/Users/hayato_saitou/Library/pnpm"
-{{- else if eq .chezmoi.os "linux" }}
-{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-export PNPM_HOME="$HOME/.local/share/pnpm"
-{{-	end }}
-{{- end }}
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+# activate mise
+eval "$(mise activate zsh)"
+
+# plugins (zsh-z, autosuggestions, syntax-highlighting は最後に読み込む)
+eval "$(sheldon source)"
 
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
 eval "$(starship init zsh)"

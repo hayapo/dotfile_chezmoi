@@ -1,0 +1,24 @@
+# PATH はここで一元管理する（非ログインシェルでも有効にするため）
+# macOS は /etc/zprofile の path_helper が並べ替えるので、.zprofile の最後でこのファイルを読み直す
+# 全ての zsh 起動で読まれるので、コマンド実行は書かず変数の代入だけにする
+{{- if eq .chezmoi.os "darwin" }}
+export PNPM_HOME="$HOME/Library/pnpm"
+_brew_prefix=/opt/homebrew
+{{- else if eq .chezmoi.os "linux" }}
+export PNPM_HOME="$HOME/.local/share/pnpm"
+_brew_prefix=/home/linuxbrew/.linuxbrew
+# Ubuntu の /etc/zsh/zshrc が実行する compinit を省く（.zshrc で実行するため）
+skip_global_compinit=1
+{{- end }}
+
+typeset -U path PATH
+path=(
+  $HOME/.local/share/mise/shims
+  $HOME/.local/bin
+  $PNPM_HOME
+  $HOME/.cargo/bin
+  $_brew_prefix/bin
+  $_brew_prefix/sbin
+  $path
+)
+unset _brew_prefix
