@@ -1,0 +1,19 @@
+onboarding = false
+
+[ui.sound]
+enabled = true
+
+[ui.toast]
+delivery = "system"
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[ui]
+status_indicators = "symbols"
+
+[keys]
+prefix = "cmd+b"
+goto = "prefix+g"
+new_tab = "prefix+t"

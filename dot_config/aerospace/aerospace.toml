@@ -113,15 +113,15 @@ on-mode-changed = []
     alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    alt-j = 'focus left'
-    alt-k = 'focus down'
-    alt-i = 'focus up'
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
     alt-l = 'focus right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
-    alt-shift-j = 'move left'
-    alt-shift-k = 'move down'
-    alt-shift-i = 'move up'
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
     alt-shift-l = 'move right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
@@ -193,9 +193,9 @@ on-mode-changed = []
     alt-shift-z = 'move-node-to-workspace Z'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    alt-tab = 'workspace-back-and-forth'
+    # alt-tab = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    # alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
@@ -230,77 +230,114 @@ on-mode-changed = []
     9 = 'built-in'
     0 = 'built-in'
 
-    A = ['^lg ultrafine$', 'built-in']
-    S = ['^lg ultrafine$', 'built-in']
-    D = ['^lg ultrafine$', 'built-in']
-    F = ['^lg ultrafine$', 'built-in']
-    G = ['^lg ultrafine$', 'built-in']
+    Q = ['^lg', 'main', 'built-in']
+    W = ['^lg', 'main', 'built-in']
+    E = ['^lg', 'main', 'built-in']
+    R = ['^lg', 'main', 'built-in']
+    T = ['^lg', 'main', 'built-in']
 
-    Z = ['^lg ultrafine$', 'built-in']
-    X = ['^lg ultrafine$', 'built-in']
-    C = ['^lg ultrafine$', 'built-in']
-    V = ['^lg ultrafine$', 'built-in']
-    B = ['^lg ultrafine$', 'built-in']
+    A = ['^lg', 'main', 'built-in']
+    S = ['^lg', 'main', 'built-in']
+    D = ['^lg', 'main', 'built-in']
+    F = ['^lg', 'main', 'built-in']
+    G = ['^lg', 'main', 'built-in']
 
-    Q = ['sidecar', 'built-in', '^lg ultrafine$']
-    W = ['sidecar', 'built-in', '^lg ultrafine$']
-    E = ['sidecar', 'built-in', '^lg ultrafine$']
-    R = ['sidecar', 'built-in', '^lg ultrafine$']
-    T = ['sidecar', 'built-in', '^lg ultrafine$']
+    H = ['^lg', 'main', 'built-in']
+    J = ['^lg', 'main', 'built-in']
+    K = ['^lg', 'main', 'built-in']
+    L = ['^lg', 'main', 'built-in']
 
-# Workspace 1 app setting
+    Z = ['built-in', '^lg', 'main']
+    X = ['built-in', '^lg', 'main']
+    C = ['built-in', '^lg', 'main']
+    V = ['built-in', '^lg', 'main']
+    B = ['built-in', '^lg', 'main']
+
+    N = ['built-in', '^lg', 'main']
+    M = ['built-in', '^lg', 'main']
+
+## Obsidian
 [[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace A'
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = 'move-node-to-workspace A'
-
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace S'
+if.app-id = 'md.obsidian'
+if.window-title-regex-substring = '仕事関係'
+run = ['move-node-to-workspace F']
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = ['move-node-to-workspace D']
+if.window-title-regex-substring = 'hayapo_Obsidian_Sync'
+run = ['move-node-to-workspace E']
+
+## Chrome
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+if.window-title-regex-substring = '隼人 (dwango)'
+run = 'move-node-to-workspace D'
 
 [[on-window-detected]]
-if.app-id = "com.figma.Desktop"
-run = "move-node-to-workspace G"
+if.app-id = 'com.google.Chrome'
+if.window-title-regex-substring = 'dev_ippan'
+run = 'move-node-to-workspace A'
 
 [[on-window-detected]]
-if.app-id = "company.thebrowser.dia"
-run = ['move-node-to-workspace 3']
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace D'
+
+# Workspace row-1 app setting
+[[on-window-detected]]
+if.app-id = "com.bitwarden.desktop"
+run = ['layout floating', 'move-node-to-workspace Q']
 
 [[on-window-detected]]
-if.app-id = "com.spotify.client"
-run = ['move-node-to-workspace 2']
+if.app-id = 'com.cisco.secureclient.gui'
+run = ['layout floating', 'move-node-to-workspace Q']
+
+[[on-window-detected]]
+if.app-id = 'com.electron.dockerdesktop'
+run = ["layout floating", 'move-node-to-workspace Q']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = ["layout floating", 'move-node-to-workspace Q']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = ["layout floating", 'move-node-to-workspace Q']
+
+[[on-window-detected]]
+if.app-id = 'me.proton.pass.electron'
+run = ["layout floating", 'move-node-to-workspace Q']
+
+[[on-window-detected]]
+if.app-id = 'io.raindrop.macapp'
+run = ['move-node-to-workspace E']
+
+# Workspace row-2 app setting
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = ['move-node-to-workspace A']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['move-node-to-workspace S']
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace F']
+
+[[on-window-detected]]
+if.app-id = 'com.figma.Desktop'
+run = ['move-node-to-workspace G']
+
+# Workspace row-3 app setting
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = ['move-node-to-workspace Z']
 
 [[on-window-detected]]
 if.app-id = "com.macpomodoro"
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace X']
 
 [[on-window-detected]]
-if.app-id = "com.apple.finder"
-run = "layout floating"
-
-[[on-window-detected]]
-if.app-id = "com.cisco.secureclient.gui"
-run = "layout floating"
-
-[[on-window-detected]]
-if.app-id = "com.electron.dockerdesktop"
-run = "layout floating"
-
-[[on-window-detected]]
-if.app-id = "com.bitwarden.desktop"
-run = ['layout floating', 'move-node-to-workspace A']
-
-[[on-window-detected]]
-if.app-id = "com.apple.ActivityMonitor"
-run = ["layout floating"]
+if.app-id = 'company.thebrowser.dia'
+run = ['move-node-to-workspace C']
