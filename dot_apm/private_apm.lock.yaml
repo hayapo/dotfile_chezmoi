@@ -1,0 +1,34 @@
+lockfile_version: '1'
+apm_version: 0.35.0
+dependencies:
+- repo_url: herdrdev/herdr
+  name: herdr
+  host: github.com
+  resolved_commit: ee5bfb5041bb3e4a49d591c72308aae3c81ecdde
+  version: unknown
+  package_type: skill_bundle
+  deployed_files:
+  - .claude/skills/herdr
+  - .claude/skills/herdr/SKILL.md
+  deployed_file_hashes:
+    .claude/skills/herdr/SKILL.md: sha256:fbd9d502767f7dff29c211505a0bd9ba34e980ed4cc456247e2adc1642883984
+  content_hash: sha256:1a9db772fb02e8b34787eaefb887460361d815b85e26ee5387b0ecf4e93dbd7a
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/skills/herdr
+  runtime: null
+  scope: project
+  owners:
+  - herdrdev/herdr
+  active_owner: herdrdev/herdr
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/herdr/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - herdrdev/herdr
+  active_owner: herdrdev/herdr
+  content_hash: sha256:fbd9d502767f7dff29c211505a0bd9ba34e980ed4cc456247e2adc1642883984
