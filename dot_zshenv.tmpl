@@ -3,10 +3,10 @@
 # 全ての zsh 起動で読まれるので、コマンド実行は書かず変数の代入だけにする
 {{- if eq .chezmoi.os "darwin" }}
 export PNPM_HOME="$HOME/Library/pnpm"
-_brew_prefix=/opt/homebrew
+_brew_prefix={{ includeTemplate ".chezmoitemplates/brew-prefix.tmpl" . }}
 {{- else if eq .chezmoi.os "linux" }}
 export PNPM_HOME="$HOME/.local/share/pnpm"
-_brew_prefix=/home/linuxbrew/.linuxbrew
+_brew_prefix={{ includeTemplate ".chezmoitemplates/brew-prefix.tmpl" . }}
 # Ubuntu の /etc/zsh/zshrc が実行する compinit を省く（.zshrc で実行するため）
 skip_global_compinit=1
 {{- end }}

@@ -1,7 +1,12 @@
 #!/bin/bash
 
 {{ if eq .chezmoi.os "linux" }}
-
-sudo apt update
-
+if [ -r /etc/os-release ]; then
+    . /etc/os-release
+    case "${ID:-}" in
+        debian|ubuntu)
+            if command -v apt-get >/dev/null 2>&1; then sudo apt-get update; fi
+            ;;
+    esac
+fi
 {{ end }}

@@ -1,0 +1,24 @@
+#!/bin/sh
+# Brewfile: {{ includeTemplate "dot_Brewfile" . | sha256sum }}
+set -eu
+
+case "$(uname -s)" in Darwin|Linux) ;; *) exit 0 ;; esac
+
+if command -v brew >/dev/null 2>&1; then
+    brew_bin=$(command -v brew)
+else
+    for path in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew /usr/local/bin/brew; do
+        if [ -x "$path" ]; then brew_bin=$path; break; fi
+    done
+fi
+
+if [ -z "${brew_bin:-}" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    for path in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew /usr/local/bin/brew; do
+        if [ -x "$path" ]; then brew_bin=$path; break; fi
+    done
+fi
+
+[ -n "${brew_bin:-}" ]
+eval "$("$brew_bin" shellenv)"
+brew bundle --no-upgrade --file="$HOME/.Brewfile"
