@@ -40,4 +40,4 @@ specifiers = ["stable"]
 [tools.rust.options]
 components = "clippy,rust-docs,rust-src,rustfmt"
 profile = "default"
-targets = "aarch64-apple-darwin,x86_64-unknown-none"
+targets = "{{ includeTemplate ".chezmoitemplates/rust-target.tmpl" . }},x86_64-unknown-none"
