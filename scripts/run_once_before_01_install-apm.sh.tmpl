@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+command -v apm >/dev/null 2>&1 && exit 0
+[ ! -e "$HOME/.local/bin/apm" ] && [ ! -L "$HOME/.local/bin/apm" ] || exit 1
+case "$(uname -s)" in Darwin|Linux) ;; *) exit 1 ;; esac
+
+installer=$(mktemp)
+trap 'rm -f "$installer"' EXIT
+curl -fsSL https://aka.ms/apm-unix -o "$installer"
+VERSION=v0.35.1 APM_NO_MODIFY_PATH=1 sh "$installer"

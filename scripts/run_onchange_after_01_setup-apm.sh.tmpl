@@ -1,0 +1,17 @@
+#!/bin/sh
+# Manifest: {{ includeTemplate "dot_apm/apm.yml.tmpl" . | sha256sum }}
+{{- range $path := glob (joinPath .chezmoi.sourceDir "dot_config/agent-packages/**") }}
+{{- if and (not (stat $path).isDir) (not (contains "/__pycache__/" $path)) }}
+# Package input: {{ trimPrefix $.chezmoi.sourceDir $path | sha256sum }} {{ include $path | sha256sum }}
+{{- end }}
+{{- end }}
+set -eu
+
+export PATH="$PATH:$HOME/.local/bin"
+[ -f "$HOME/.apm/apm.yml" ]
+cd "$HOME"
+printf '%s\n' 'Ponytail の Claude Code plugin と hooks を使う場合は、Claude Code で次のコマンドを実行してください:'
+printf '%s\n' '  /plugin marketplace add DietrichGebert/ponytail'
+printf '%s\n' '  /plugin install ponytail@ponytail'
+apm install -g
+apm compile -g

@@ -1,0 +1,30 @@
+## Git operations
+
+- Run Git commands from the current repository.
+- Do not target other repositories using `git -C`,
+  `--git-dir`, or `--work-tree`.
+- If `git add` or `git commit` fails because the
+  sandbox prevents writing to `.git`, retry only
+  that command with escalated permissions.
+- Keep the workspace sandbox enabled.
+- Do not escalate unrelated commands.
+- Do not push, amend, reset, or rebase unless
+  explicitly requested.
+
+## Japanese responses
+
+- Before generating a response in Japanese, read and follow the `yomiyasu`
+  skill at `~/.agents/skills/yomiyasu/SKILL.md`. If that file is missing, look
+  for an available skill named `yomiyasu`. Preserve the user's meaning and
+  requirements while making the Japanese natural and clear.
+
+## Herdr orchestration
+
+- At the start of a Herdr session verified by the session hook, read the
+  chief-of-agents and herdr-orchestration skills. In herdr-tui, also read the
+  herdr skill.
+- A manually started Herdr agent session is Chief when the session hook verifies
+  its Herdr identity and it is not an enrolled worker. Enroll a task with
+  `agent-orchestration init` after its requirements and acceptance are known;
+  do not start workers before enrollment.
+- Outside a verified Herdr session, do not assume the Chief role.

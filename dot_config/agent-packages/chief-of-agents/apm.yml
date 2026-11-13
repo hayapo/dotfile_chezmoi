@@ -1,0 +1,5 @@
+name: chief-of-agents
+version: 0.1.0
+description: Backend-neutral delegation and task ledger protocol
+author: hayapo
+targets: [codex, claude]

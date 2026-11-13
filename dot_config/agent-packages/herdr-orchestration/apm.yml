@@ -1,0 +1,5 @@
+name: herdr-orchestration
+version: 0.1.0
+description: Shared orchestration lifecycle with hc/herdr-app and herdr-tui backends
+author: hayapo
+targets: [codex, claude]

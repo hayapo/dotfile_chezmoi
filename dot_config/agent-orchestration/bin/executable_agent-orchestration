@@ -1,0 +1,2 @@
+#!/bin/sh
+exec python3 "$HOME/.config/agent-packages/herdr-orchestration/scripts/orchestrate.py" "$@"

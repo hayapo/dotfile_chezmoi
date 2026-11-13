@@ -1,1 +1,16 @@
 README.md
+
+# APM owns deployed primitives and acquired dependencies, never chezmoi.
+.apm/apm_modules/**
+.apm/cache/**
+.local/state/agent-orchestration/tasks/**
+.local/state/agent-orchestration/logs/**
+tests
+tests/**
+**/__pycache__/**
+
+# Optional, machine-local shell secrets are loaded by dot_zshrc.tmpl.
+.config/zsh/secrets.zsh
+
+# Machine-local live validation evidence must survive source deployment.
+.local/state/agent-orchestration/validation.json

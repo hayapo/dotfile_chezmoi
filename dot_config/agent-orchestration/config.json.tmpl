@@ -1,0 +1,9 @@
+{{- $backend := "" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+  {{- $backend = "hc-herdr-app" -}}
+{{- else if or (env "WSL_DISTRO_NAME") (contains "microsoft" (lower .chezmoi.kernel)) -}}
+  {{- $backend = "herdr-tui" -}}
+{{- end -}}
+{
+  "default_backend": "{{ $backend }}"
+}
