@@ -6,10 +6,17 @@ author: hayapo
 # Resolution order: --target flag > this field > auto-detect from filesystem.
 # Accepted values: agent-skills, antigravity, claude, codex, copilot, cursor, gemini, grok-bot, grok-build, hermes, kiro, opencode, vscode, windsurf
 targets:
+  - codex
   - claude
 dependencies:
   apm:
     - herdrdev/herdr
+    - nanaism/yomiyasu
+    - git: https://github.com/DietrichGebert/ponytail.git
+      skills:
+        - ponytail
+    - path: {{ printf "%s/.config/agent-packages/chief-of-agents" .chezmoi.homeDir | quote }}
+    - path: {{ printf "%s/.config/agent-packages/herdr-orchestration" .chezmoi.homeDir | quote }}
   mcp: []
 includes: auto
 scripts: {}
