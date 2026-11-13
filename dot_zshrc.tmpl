@@ -160,3 +160,12 @@ eval "$(sheldon source)"
 
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain Zsh initialization script
 eval "$(starship init zsh)"
+
+# Human-facing orchestration commands (zsh unique path array).
+typeset -U path
+path=("$HOME/.config/agent-orchestration/bin" $path)
+
+# Optional, Git-unmanaged machine-local environment settings.
+if [[ -r "$HOME/.config/zsh/secrets.zsh" ]]; then
+  source "$HOME/.config/zsh/secrets.zsh"
+fi

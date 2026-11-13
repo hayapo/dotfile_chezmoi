@@ -1,0 +1,4 @@
+# Optional, machine-local shell secrets, including chezmoi private_ directory
+# and file attributes; never add credentials to this repo.
+/.config/zsh/secrets.zsh
+/*dot_config/*zsh/*secrets.zsh
