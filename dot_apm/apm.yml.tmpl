@@ -12,12 +12,6 @@ dependencies:
   apm:
     - herdrdev/herdr#2ecf19a92fc3a7fff75b6ce3655ef04f4625ec01
     - nanaism/yomiyasu#db78b9bc5e868549b517a037df7a4d1c93edac23
-    # Codex はリポジトリ全体を plugin として使い、hooks も含めて導入する。
-    # APM は claude-codex-hooks.json を Codex にも登録するが、hook コマンドはClaude 専用の CLAUDE_PLUGIN_ROOT を参照する。
-    # その結果 Codex では変数が設定 hook が終了コード 1 になる。
-    # 一時的な workaround として、Codex 用 pluginのみインストールし、Claude 用 plugin は claude の /plugin コマンドでインストールする。
-    - git: https://github.com/DietrichGebert/ponytail.git#7801d061243d7b753bad0e0b3c057cd250b11755
-      targets: [codex]
     - path: {{ printf "%s/.config/agent-packages/chief-of-agents" .chezmoi.homeDir | quote }}
     - path: {{ printf "%s/.config/agent-packages/herdr-orchestration" .chezmoi.homeDir | quote }}
   mcp: []

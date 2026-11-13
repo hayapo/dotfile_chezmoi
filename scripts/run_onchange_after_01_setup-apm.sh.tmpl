@@ -15,7 +15,10 @@ if [ ! -f "$HOME/.apm/apm.yml" ]; then
 APM_MANIFEST
 fi
 cd "$HOME"
-printf '%s\n' 'Ponytail の Claude Code plugin と hooks を使う場合は、Claude Code で次のコマンドを実行してください:'
+printf '%s\n' 'Ponytail を Codex で使う場合は、Codex で次のコマンドを実行してください:'
+printf '%s\n' '  /plugin marketplace add DietrichGebert/ponytail'
+printf '%s\n' '  /plugin install ponytail@ponytail'
+printf '%s\n' 'Claude Code で使う場合は、Claude Code で次のコマンドを実行してください:'
 printf '%s\n' '  /plugin marketplace add DietrichGebert/ponytail'
 printf '%s\n' '  /plugin install ponytail@ponytail'
 apm install -g

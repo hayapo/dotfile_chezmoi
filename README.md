@@ -75,10 +75,8 @@ brew bundle --no-upgrade --file="$HOME/.Brewfile"
 
 The apt update hook runs only on Debian or Ubuntu systems that provide `apt-get`.
 
-APM installs Ponytail as a Codex plugin, including its skills and lifecycle
-hooks. Review and trust the Codex hooks in `/hooks`. For Claude Code, install
-Ponytail's plugin, skills and hooks separately with the `/plugin` commands
-printed during `chezmoi apply`.
+Install Ponytail as a plugin in both Codex and Claude Code with the `/plugin`
+commands printed during `chezmoi apply`. APM does not install Ponytail.
 
 For machine-local shell credentials, place Zsh settings in
 `~/.config/zsh/secrets.zsh`; the managed Zsh config sources it only when it is
