@@ -1,0 +1,11 @@
+#!/bin/sh
+# WezTerm config: {{ includeTemplate "dot_config/wezterm/dot_wezterm.lua.tmpl" . | sha256sum }}
+set -eu
+
+if [ -z "${WSL_DISTRO_NAME:-}" ] && ! uname -r | grep -qiE '(microsoft|wsl)'; then
+    exit 0
+fi
+
+windows_profile=$(cmd.exe /C echo %USERPROFILE% | tr -d '\r')
+windows_profile=$(wslpath -u "$windows_profile")
+cp "$HOME/.config/wezterm/.wezterm.lua" "$windows_profile/.wezterm.lua"

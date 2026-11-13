@@ -1,0 +1,23 @@
+onboarding = false
+
+[ui.sound]
+enabled = true
+
+[ui.toast]
+delivery = "system"
+
+[theme]
+name = "terminal"
+auto_switch = false
+
+[ui]
+status_indicators = "symbols"
+show_agent_labels_on_pane_borders = true
+
+[ui.sidebar.agents]
+rows = [["state_icon", "machine", "workspace", "tab"], ["$tree_branch", "agent", "state_text"]]
+
+[keys]
+prefix = "{{ if eq .chezmoi.os "darwin" }}cmd+b{{ else }}alt+b{{ end }}"
+goto = "prefix+g"
+new_tab = "prefix+t"

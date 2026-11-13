@@ -18,8 +18,10 @@ config.wsl_domains = {
 config.default_domain = "Ubuntu"
 
 -- Setting the colorscheme
-config.color_scheme = 'Vs Code Dark+ (Gogh)'
--- config.color_scheme = "MaterialDesignColors"
+-- config.color_scheme = 'Classic Dark (base16)'
+config.color_scheme = 'deep'
+-- config.color_scheme = 'Dark+'
+-- config.color_scheme = 'matrix'
 
 -- Setting the environment
 config.font = wezterm.font("UDEV Gothic 35NFLG", { weight = "Regular" })
@@ -38,23 +40,6 @@ config.window_padding = {
 }
 
 config.window_background_opacity = 0.9
-
-
-{{- if eq .chezmoi.os "darwin" }}
-{{- else if eq .chezmoi.os "linux" }}
-{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
--- Setting the window background image
--- local Laughingman = "C:\\Users\\hayat\\Pictures\\wallpaper\\laughing_man_1.jpg"
-local Laughingman = "C:\\Users\\hayat\\Pictures\\wallpaper\\laughing_man_2.jpg"
-config.window_background_image = Laughingman
-config.window_background_image_hsb = {
-    brightness = 0.1,
-    hue = 1.0,
-    saturation = 1.0,
-}
-{{-	end }}
-{{- end }}
-
 
 -- ウィンドウ・タブの装飾
 
@@ -80,6 +65,12 @@ local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
 
 local act = wezterm.action
 config.keys = {
+    {
+        -- Shift+EnterでCtrl+J相当の改行を送信
+        key = "Enter",
+        mods = "SHIFT",
+        action = act.SendString '\n',
+    },
     {
         -- Alt+Shift+Fでフルスクリーンをトグル
         key = "f",
